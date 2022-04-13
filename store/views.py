@@ -24,3 +24,6 @@ def cart(request):
 
     context = {'items': items}
     return render(request, 'cart.html', context)
+
+
+# Test commit to github
