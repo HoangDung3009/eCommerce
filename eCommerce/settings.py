@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'products.clothes.apps.ClothesConfig',
     'products.laptops.apps.LaptopsConfig',
     'products.phones.apps.PhonesConfig',
-    'django.contrib.humanize'
+    'django.contrib.humanize',
+    'cart.apps.CartConfig'
 ]
 
 MIDDLEWARE = [
@@ -67,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart'
             ],
         },
     },
