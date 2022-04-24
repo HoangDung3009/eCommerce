@@ -20,3 +20,8 @@ class Laptop(Product):
 
     def __str__(self):
         return self.product_name
+
+    @property
+    def photo_url(self):
+        if self.product_thumb and hasattr(self.product_thumb, 'url'):
+            return self.product_thumb.url

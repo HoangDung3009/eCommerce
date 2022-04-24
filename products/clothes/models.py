@@ -22,6 +22,7 @@ SiZE_CHOICES = (("S", "S"),
 
 class Color(models.Model):
     name = models.CharField(max_length=200, null=True, choices=COLOR_CHOICES, default="Black")
+    code = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -45,3 +46,8 @@ class Clothes(Product):
 
     def __str__(self):
         return self.product_name
+
+    @property
+    def photo_url(self):
+        if self.product_thumb and hasattr(self.product_thumb, 'url'):
+            return self.product_thumb.url

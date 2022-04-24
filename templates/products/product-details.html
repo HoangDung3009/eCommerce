@@ -95,12 +95,13 @@
 											<div class="row row-cols-auto align-items-center mt-3">
 												<div class="col">
 													<label class="form-label">Quantity</label>
-													<select class="form-select form-select-sm">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
+													<select name="quantity" class="form-select form-select-sm">
+														<option value="1">1</option>
+														<option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
 													</select>
 												</div>
                                                 {% if product.category.cat_name == 'Clothes' %}
@@ -108,7 +109,7 @@
 {#                                                    Size#}
 													<label class="form-label">Size</label>
 													<select class="form-select form-select-sm">
-                                                        {% for p in clothes_color %}
+                                                        {% for p in clothes_size %}
                                                              <option value="{{ p.id }}">{{ p.name }}</option>
                                                         {% endfor %}
 

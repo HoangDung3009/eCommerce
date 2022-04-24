@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'products.clothes.apps.ClothesConfig',
     'products.laptops.apps.LaptopsConfig',
     'products.phones.apps.PhonesConfig',
+    'orders.apps.OrdersConfig',
     'django.contrib.humanize',
 ]
 
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'eCommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # <-- UPDATED line
-        'NAME': 'ecommerce',  # <-- UPDATED line
+        'NAME': 'ecommerce_pttk',  # <-- UPDATED line
         'USER': 'root',  # <-- UPDATED line
         'PASSWORD': '',  # <-- UPDATED line
         'HOST': 'localhost',  # <-- UPDATED line
@@ -126,9 +127,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_URL = '/images/product/'
+MEDIA_URL = '/images/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/product')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
