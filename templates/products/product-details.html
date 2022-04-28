@@ -92,6 +92,10 @@
                                                     <dd class="col-sm-9">{{ product.publisher }}</dd>
                                                 {% endif %}
 											</dl>
+                                        <form method="post" action="{% url 'addCart' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                        <input type="hidden" name="action" value="updateItem">
 											<div class="row row-cols-auto align-items-center mt-3">
 												<div class="col">
 													<label class="form-label">Quantity</label>
@@ -108,30 +112,33 @@
                                                 <div class="col">
 {#                                                    Size#}
 													<label class="form-label">Size</label>
-													<select class="form-select form-select-sm">
+													<select name="size_id" class="form-select form-select-sm">
                                                         {% for p in clothes_size %}
                                                              <option value="{{ p.id }}">{{ p.name }}</option>
                                                         {% endfor %}
 
 													</select>
 												</div>
-												<div class="col">
-{#                                                    Color#}
-													<label class="form-label">Colors</label>
-													<div class="color-indigators d-flex align-items-center gap-2">
-                                                        {% for i in clothes_color  %}
-                                                            <div class="color-indigator-item" style="background-color: {{ i.name|lower }}"></div>
+
+                                                    <div class="col">
+{#                                                    color#}
+													<label class="form-label">Size</label>
+													<select name="color_id" class="form-select form-select-sm">
+                                                        {% for i in clothes_color %}
+                                                             <option value="{{ i.id }}">{{ i.name }}</option>
                                                         {% endfor %}
-													</div>
+
+													</select>
 												</div>
-                                                {% endif %}
+{#	                                                {% endif %}
 
 											</div>
 											<!--end row-->
 											<div class="d-flex gap-2 mt-3">
-												<button type="button" id="add-button" value="{{ p.id }}" class="btn btn-white btn-ecomm">	<i class="bx bxs-cart-add"></i>Add to Cart</button>
+												<button type="submit" id="add-button" class="btn btn-white btn-ecomm">	<i class="bx bxs-cart-add"></i>Add to Cart</button>
 {#                                                <a href="javascript:;" class="btn btn-light btn-ecomm"><i class="bx bx-heart"></i>Add to Wishlist</a>#}
 											</div>
+                                        </form>
 											<hr/>
 											<div class="product-sharing">
 												<ul class="list-inline">

@@ -55,12 +55,25 @@
 											</div>
 											<div class="col-12 col-lg-3">
 												<div class="cart-action text-center">
-													<input type="number" class="form-control rounded-0" value="{{ item.quantity }}" min="1">
+                                                    <div class="row">
+                                                        <form method="post" action="{% url 'addQuantity' %}" id="add-form">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                                                            <input type="submit" class="col-3 btn btn-outline-dark m-2" name="action" value="-">
+										                    <input type="text"  class="col-3 box-flex" value="{{ item.quantity }}" disabled>
+										                    <input type="submit" class="col-3 btn btn-outline-dark m-2" name="action" value="+">
+                                                        </form>
+                                                    </div>
 												</div>
 											</div>
 											<div class="col-12 col-lg-3">
 												<div class="text-center">
-													<div class="d-flex gap-2 justify-content-center justify-content-lg-end"> <a href="javascript:;" class="btn btn-dark rounded-0 btn-ecomm"><i class='bx bx-x-circle'></i> Remove</a>
+													<div class="d-flex gap-2 justify-content-center justify-content-lg-end">
+                                                        <form method="post" action="{% url 'addQuantity' %}" id="add-form">
+                                                            {% csrf_token %}
+                                                                <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                                                                <input type="submit" name="action" value="Remove" class="btn btn-dark rounded-0 btn-ecomm"/>
+                                                            </form>
 														<a href="javascript:;" class="btn btn-light rounded-0 btn-ecomm"><i class='bx bx-heart me-0'></i></a>
 													</div>
 												</div>
@@ -71,7 +84,8 @@
                                         {% endfor %}
 
 
-										<div class="d-lg-flex align-items-center gap-2">	<a href="javascript:;" class="btn btn-dark btn-ecomm"><i class='bx bx-shopping-bag'></i> Continue Shopping</a>
+										<div class="d-lg-flex align-items-center gap-2">
+                                            <a href="{% url 'product-list' %}" class="btn btn-dark btn-ecomm"><i class='bx bx-shopping-bag'></i> Continue Shopping</a>
 											<a href="javascript:;" class="btn btn-light btn-ecomm ms-auto"><i class='bx bx-x-circle'></i> Clear Cart</a>
 											<a href="javascript:;" class="btn btn-white btn-ecomm"><i class='bx bx-refresh'></i> Update Cart</a>
 										</div>
@@ -108,16 +122,8 @@
 										</div>
 										<div class="card rounded-0 border bg-transparent mb-0 shadow-none">
 											<div class="card-body">
-{#												<p class="mb-2">Subtotal: <span class="float-end">$198.00</span>#}
-{#												</p>#}
-{#												<p class="mb-2">Shipping: <span class="float-end">--</span>#}
-{#												</p>#}
-{#												<p class="mb-2">Taxes: <span class="float-end">$14.00</span>#}
-{#												</p>#}
-{#												<p class="mb-0">Discount: <span class="float-end">--</span>#}
-{#												</p>#}
 												<div class="my-3 border-top"></div>
-												<h5 class="mb-0">Order Total: <span class="float-end">212.00</span></h5>
+												<h5 class="mb-0">Order Total: <span class="float-end">{{ order.get_cart_total|intcomma }} VND</span></h5>
 												<div class="my-4"></div>
 												<div class="d-grid"> <a href="" class="btn btn-dark btn-ecomm">Proceed to Checkout</a>
 												</div>

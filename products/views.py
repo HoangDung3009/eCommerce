@@ -46,3 +46,5 @@ def getProductDetail(request, product_id, category_name):
         context = {'product': product}
 
     return render(request, 'products/product-details.html', context)
+
+# def searchProduct(request, keyword):
