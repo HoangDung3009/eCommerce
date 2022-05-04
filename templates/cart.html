@@ -49,7 +49,7 @@
 {#														</p>#}
 {#														<p class="mb-2">Color: <span>White & Blue</span>#}
 {#														</p>#}
-														<h5 class="mb-0">{{item.product.price|intcomma}} VND</h5>
+														<h5 class="mb-0">{{item.product.price|intcomma}} USD</h5>
 													</div>
 												</div>
 											</div>
@@ -93,40 +93,16 @@
 								</div>
 								<div class="col-12 col-xl-4">
 									<div class="checkout-form p-3 bg-light">
-										<div class="card rounded-0 border bg-transparent shadow-none">
-											<div class="card-body">
-												<p class="fs-5">Estimate Shipping and Tax</p>
-												<div class="my-3 border-top"></div>
-												<div class="mb-3">
-													<label class="form-label">Country Name</label>
-													<select class="form-select rounded-0">
-														<option selected>United States</option>
-														<option value="1">Australia</option>
-														<option value="2">India</option>
-														<option value="3">Canada</option>
-													</select>
-												</div>
-												<div class="mb-3">
-													<label class="form-label">State/Province</label>
-													<select class="form-select rounded-0">
-														<option selected>California</option>
-														<option value="1">Texas</option>
-														<option value="2">Canada</option>
-													</select>
-												</div>
-												<div class="mb-0">
-													<label class="form-label">Zip/Postal Code</label>
-													<input type="email" class="form-control rounded-0">
-												</div>
-											</div>
-										</div>
 										<div class="card rounded-0 border bg-transparent mb-0 shadow-none">
 											<div class="card-body">
 												<div class="my-3 border-top"></div>
-												<h5 class="mb-0">Order Total: <span class="float-end">{{ order.get_cart_total|intcomma }} VND</span></h5>
+												<h5 class="mb-0">Order Total: <span class="float-end">{{ order.get_cart_total|intcomma }} USD</span></h5>
 												<div class="my-4"></div>
-												<div class="d-grid"> <a href="" class="btn btn-dark btn-ecomm">Proceed to Checkout</a>
+                                                {% if items %}
+                                                    <div class="d-grid"> <a href="{% url 'checkout' %}" class="btn btn-dark btn-ecomm">Proceed to Checkout</a>
 												</div>
+                                                {% endif %}
+
 											</div>
 										</div>
 									</div>

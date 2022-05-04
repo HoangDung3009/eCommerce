@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import JsonResponse
@@ -13,11 +15,13 @@ def cart(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order}
+    context = {'items': items, 'order': order, 'cart_item': cartItems}
     return render(request, 'cart.html', context)
 
 
@@ -27,12 +31,13 @@ def checkout(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
     else:
-        # Create empty cart for now for non-logged in user
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order}
+    context = {'items': items, 'order': order, 'cart_item': cartItems}
     return render(request, 'checkout.html', context)
 
 
@@ -81,3 +86,36 @@ def updateQuantity(request):
         orderDetail.delete()
 
     return redirect('cart')
+
+
+def completeOder(request):
+    return render(request, 'order-complete.html')
+
+
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(request.POST['total'])
+        order.transaction_id = transaction_id
+
+        if total == order.get_cart_total:
+            order.complete = True
+
+        order.save()
+
+        if order.shipping == True:
+            ShippingAddress.objects.create(
+                customer=customer,
+                order=order,
+                address=request.POST['address'],
+                city=request.POST['address'],
+                district=request.POST['district'],
+                zip_code=request.POST['zipcode']
+            )
+        else:
+            print('User is not logged in')
+
+        return redirect('complete')

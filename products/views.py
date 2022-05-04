@@ -1,28 +1,57 @@
 from django.shortcuts import render
+
+from orders.models import Order
 from store.models import Product, Category
 from products.books.models import Book
 from products.phones.models import Phone
 from products.clothes.models import Clothes, Color, Size
 from products.laptops.models import Laptop
+from django.core.paginator import Paginator
 
 
 # Create your views here.
 # Lay ra tat ca san pham:
 def getAllProduct(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
     product_list = Product.objects.all()
-    context = {'product_lists': product_list}
+    # paginator = Paginator(product_list, 8)
+    #
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+
+    context = {'product_lists': product_list, 'cart_item': cartItems}
     return render(request, 'products/product-list.html', context)
 
 
 # Lay ra mot san pham theo id va category
 def getProductDetail(request, product_id, category_name):
     context = {}
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
     if category_name == 'Book':
         product = Book.objects.get(id=product_id)
-        context = {'product': product}
+        context = {'product': product, 'cart_item': cartItems}
     elif category_name == 'Laptop':
         product = Laptop.objects.get(id=product_id)
-        context = {'product': product}
+        context = {'product': product, 'cart_item': cartItems}
     elif category_name == 'Clothes':
         product = Clothes.objects.get(id=product_id)
         query1 = 'SELECT clothes_color.id, clothes_color.name ' \
@@ -39,12 +68,28 @@ def getProductDetail(request, product_id, category_name):
 
         context = {'product': product,
                    'clothes_color': clothes_color,
-                   'clothes_size': clothes_size
+                   'clothes_size': clothes_size,
+                   'cart_item': cartItems
                    }
     elif category_name == 'Phone':
         product = Phone.objects.get(id=product_id)
-        context = {'product': product}
+        context = {'product': product, 'cart_item': cartItems}
 
     return render(request, 'products/product-details.html', context)
 
-# def searchProduct(request, keyword):
+
+def searchProduct(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    keyword = request.GET['keyword']
+    products = Product.objects.filter(product_name__contains=keyword)
+    context = {'product_lists': products, 'cart_item': cartItems}
+    return render(request, 'products/product-list.html', context)
