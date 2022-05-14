@@ -11,5 +11,4 @@ urlpatterns = [
 
     path('processOrder', views.processOrder, name='processOrder'),
 
-    path('complete/', views.completeOder, name='complete')
 ]

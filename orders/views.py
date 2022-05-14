@@ -88,9 +88,6 @@ def updateQuantity(request):
     return redirect('cart')
 
 
-def completeOder(request):
-    return render(request, 'order-complete.html')
-
 
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
@@ -105,8 +102,9 @@ def processOrder(request):
             order.complete = True
 
         order.save()
+        cartItems = order.get_cart_counts
 
-        if order.shipping == True:
+        if order.shipping:
             ShippingAddress.objects.create(
                 customer=customer,
                 order=order,
@@ -118,4 +116,4 @@ def processOrder(request):
         else:
             print('User is not logged in')
 
-        return redirect('complete')
+        return render(request, 'order-complete.html', {'order': order, 'car_item': cartItems})
