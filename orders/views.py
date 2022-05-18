@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import JsonResponse
@@ -42,6 +43,7 @@ def checkout(request):
 
 
 # update cart
+@login_required(login_url="login")
 def addCart(request):
     product_id = request.POST['product_id']
     action = request.POST['action']
@@ -61,6 +63,7 @@ def addCart(request):
         return redirect('product-list')
 
 
+@login_required(login_url="login")
 def updateQuantity(request):
     product_id = request.POST['product_id']
     action = request.POST['action']
@@ -86,7 +89,6 @@ def updateQuantity(request):
         orderDetail.delete()
 
     return redirect('cart')
-
 
 
 def processOrder(request):

@@ -54,12 +54,6 @@
 							<form class="input-group flex-nowrap px-xl-4" method="get" action="{% url 'searchProduct' %}">
                                 {% csrf_token %}
 								<input type="text" name="keyword" class="form-control w-100" placeholder="Search for Products">
-								<select class="form-select flex-shrink-0" aria-label="Default select example" style="width: 10.5rem;">
-									<option selected>All Categories</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								</select>
                                 <button type="submit" class="input-group-text cursor-pointer bg-transparent"><i class='bx bx-search'></i></button>
 							</form>
 						</div>
@@ -74,7 +68,7 @@
 							<div class="top-cart-icons float-end">
 								<nav class="navbar navbar-expand">
 									<ul class="navbar-nav ms-auto">
-										<li class="nav-item"><a href="account-dashboard.html" class="nav-link cart-link"><i class='bx bx-user'></i></a>
+										<li class="nav-item"><a href="{% url 'profile' %}" class="nav-link cart-link"><i class='bx bx-user'></i></a>
 										</li>
 										<li class="nav-item"><a href="wishlist.html" class="nav-link cart-link"><i class='bx bx-heart'></i></a>
 										</li>
@@ -111,13 +105,13 @@
                                                 <h6 class="large-menu-title">All Products</h6>
                                             </a>
 											<ul class="">
-												<li><a href="#">Book</a>
+												<li><a href="{% url 'product-book' %}">Book</a>
 												</li>
-												<li><a href="#">Clothes</a>
+												<li><a href="{% url 'product-clothes' %}">Clothes</a>
 												</li>
-												<li><a href="#">Laptop</a>
+												<li><a href="{% url 'product-laptop' %}">Laptop</a>
 												</li>
-												<li><a href="#">Phone</a>
+												<li><a href="{% url 'product-phone' %}">Phone</a>
 												</li>
 											</ul>
 										</div>
@@ -127,11 +121,11 @@
 								</div>
 								<!-- dropdown-large.// -->
 							</li>
-							<li class="nav-item"> <a class="nav-link" href="blog.html">Blog </a>
+							<li class="nav-item"> <a class="nav-link" href="#">Blog </a>
 							</li>
-							<li class="nav-item"> <a class="nav-link" href="about-us.html">About Us </a>
+							<li class="nav-item"> <a class="nav-link" href="#">About Us </a>
 							</li>
-							<li class="nav-item"> <a class="nav-link" href="contact-us.html">Contact Us </a>
+							<li class="nav-item"> <a class="nav-link" href="#">Contact Us </a>
 							</li>
 						</ul>
 					</nav>

@@ -1,0 +1,71 @@
+{% extends 'layout/main.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+			<div class="page-content">
+				<!--start shop cart-->
+				<section class="py-4">
+					<div class="container">
+						<div class="shop-cart">
+							<div class="row">
+								<div class="col-12 col-xl-6">
+									<div class="checkout-details">
+										<div class="card rounded-0">
+											<div class="card-body">
+												<div class="border p-3">
+													<h2 class="h5 mb-0">Login</h2>
+													<div class="my-3 border-bottom"></div>
+													<div class="form-body">
+                                                        {% if messages %}
+                                                            {% for message in messages %}
+                                                                <div id="alert-message" class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+                                                            {% endfor %}
+                                                        {% endif %}
+														<form class="row g-3" method="post" action="{% url 'loginUser' %}">
+                                                            {% csrf_token %}
+															<div class="row mt-3">
+																<label class="form-label">Username</label>
+																<input type="text" name="username" class="form-control rounded-0" required>
+															</div>
+															<div class="row mt-3">
+																<label class="form-label">Password</label>
+																<input type="password" name="password" class="form-control rounded-0" required>
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <div class="col-6"><a href="#" class="form-label">Forgot password ?</a></div>
+                                                                <div class="col-2"></div>
+                                                                <div class="col-6"><div> Don't have account ? <a href="{% url 'register' %}" class="form-label">Register Here</a></div></div>
+
+															</div>
+                                                            <div class="row mt-3 center">
+                                                                    <button type="submit" class="btn btn-dark btn-ecomm">Login</button>
+																</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--end row-->
+						</div>
+					</div>
+				</section>
+
+                <script>
+                setTimeout(function (){
+                    if ($('#alert-message').length > 0){
+                        $('#alert-message').fadeOut();
+                    }
+                }, 5000)
+            </script>
+				<!--end shop cart-->
+			</div>
+		</div>
+{% endblock %}

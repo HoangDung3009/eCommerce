@@ -32,6 +32,94 @@ def getAllProduct(request):
     return render(request, 'products/product-list.html', context)
 
 
+# Lay ra tat ca san pham: Book
+def getAllBook(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    product_list = Book.objects.all();
+    # paginator = Paginator(product_list, 8)
+    #
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+
+    context = {'product_lists': product_list, 'cart_item': cartItems}
+    return render(request, 'products/product-list.html', context)
+
+
+# Lay ra tat ca san pham: Phone
+def getAllPhone(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    product_list = Phone.objects.all();
+    # paginator = Paginator(product_list, 8)
+    #
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+
+    context = {'product_lists': product_list, 'cart_item': cartItems}
+    return render(request, 'products/product-list.html', context)
+
+
+# Lay ra tat ca san pham: Laptop
+def getAllLaptop(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    product_list = Laptop.objects.all();
+    # paginator = Paginator(product_list, 8)
+    #
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+
+    context = {'product_lists': product_list, 'cart_item': cartItems}
+    return render(request, 'products/product-list.html', context)
+
+
+# Lay ra tat ca san pham: Quan Ao
+def getAllClothes(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderdetail_set.all()
+        cartItems = order.get_cart_counts
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    product_list = Clothes.objects.all();
+    # paginator = Paginator(product_list, 8)
+    #
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+
+    context = {'product_lists': product_list, 'cart_item': cartItems}
+    return render(request, 'products/product-list.html', context)
+
+
 # Lay ra mot san pham theo id va category
 def getProductDetail(request, product_id, category_name):
     context = {}
