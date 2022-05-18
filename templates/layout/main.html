@@ -60,9 +60,12 @@
 						<div class="col-4 col-md-auto order-3 d-none d-xl-flex align-items-center">
 							<div class="fs-1 text-white"><i class='bx bx-headphone'></i>
 							</div>
-							<div class="ms-2">
-								<p class="mb-0 font-13">CALL US NOW</p>
+                            {% if customer %}
+                                <div class="ms-2">
+								<p class="mb-0 font-13">Hello, {{ customer.user.username }}</p>
 							</div>
+                            {% endif %}
+
 						</div>
 						<div class="col-4 col-md-auto order-2 order-md-4">
 							<div class="top-cart-icons float-end">

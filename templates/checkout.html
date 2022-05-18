@@ -30,7 +30,7 @@
 													<h2 class="h5 mb-0">Shipping Address</h2>
 													<div class="my-3 border-bottom"></div>
 													<div class="form-body">
-														<form class="row g-3" method="post" action="{% url 'processOrder' %}">
+														<form id="checkoutForm" class="row g-3" method="post" action="{% url 'processOrder' %}">
                                                             {% csrf_token %}
 															<div class="col-md-6">
 																<label class="form-label">City/Province</label>
@@ -93,7 +93,7 @@
                                                                             console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                                                                             var transaction = orderData.purchase_units[0].payments.captures[0];
                                                                             alert('Transaction '+ transaction.status + ': ' + transaction.id);
-
+                                                                            document.getElementById("checkoutForm").submit();
                                                                             // Replace the above to show a success message within this page, e.g.
                                                                             // const element = document.getElementById('paypal-button-container');
                                                                             // element.innerHTML = '';
