@@ -22,7 +22,7 @@ def cart(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cart_item': cartItems}
+    context = {'items': items, 'order': order, 'cart_item': cartItems, 'customer': customer}
     return render(request, 'cart.html', context)
 
 
@@ -38,7 +38,7 @@ def checkout(request):
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cart_item': cartItems}
+    context = {'items': items, 'order': order, 'cart_item': cartItems, 'customer': customer}
     return render(request, 'checkout.html', context)
 
 
@@ -50,6 +50,9 @@ def addCart(request):
     quantity = int(request.POST['quantity'])
 
     product = Product.objects.get(id=product_id)
+    if product.category.cat_name == "Clothes":
+        size_id = request.POST['size']
+        color_id = request.POST['color']
     customer = request.user.customer
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     orderDetail, created = OrderDetail.objects.get_or_create(order=order, product=product)
@@ -118,4 +121,4 @@ def processOrder(request):
         else:
             print('User is not logged in')
 
-        return render(request, 'order-complete.html', {'order': order, 'car_item': cartItems})
+        return render(request, 'order-complete.html', {'order': order, 'car_item': cartItems, 'customer':customer})

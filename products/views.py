@@ -72,7 +72,7 @@ def getAllPhone(request):
     # page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number)
 
-    context = {'product_lists': product_list, 'cart_item': cartItems}
+    context = {'product_lists': product_list, 'cart_item': cartItems, 'customer': customer}
     return render(request, 'products/product-list.html', context)
 
 
@@ -94,7 +94,7 @@ def getAllLaptop(request):
     # page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number)
 
-    context = {'product_lists': product_list, 'cart_item': cartItems}
+    context = {'product_lists': product_list, 'cart_item': cartItems, 'customer': customer}
     return render(request, 'products/product-list.html', context)
 
 
@@ -116,7 +116,7 @@ def getAllClothes(request):
     # page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number)
 
-    context = {'product_lists': product_list, 'cart_item': cartItems}
+    context = {'product_lists': product_list, 'cart_item': cartItems, 'customer': customer}
     return render(request, 'products/product-list.html', context)
 
 
@@ -161,7 +161,7 @@ def getProductDetail(request, product_id, category_name):
                    }
     elif category_name == 'Phone':
         product = Phone.objects.get(id=product_id)
-        context = {'product': product, 'cart_item': cartItems}
+        context = {'product': product, 'cart_item': cartItems, 'customer': customer}
 
     return render(request, 'products/product-details.html', context)
 
@@ -179,5 +179,5 @@ def searchProduct(request):
 
     keyword = request.GET['keyword']
     products = Product.objects.filter(product_name__contains=keyword)
-    context = {'product_lists': products, 'cart_item': cartItems}
+    context = {'product_lists': products, 'cart_item': cartItems, 'customer': customer}
     return render(request, 'products/product-list.html', context)

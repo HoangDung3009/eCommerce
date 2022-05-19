@@ -8,67 +8,61 @@
 {% block content %}
 <div class="page-wrapper">
 			<div class="page-content">
+				<!--start breadcrumb-->
+				<!--end breadcrumb-->
 				<!--start shop cart-->
-				<section class="py-4">
+				<section class="py-0 py-lg-5">
 					<div class="container">
-						<div class="shop-cart">
-							<div class="row">
-								<div class="col-12 col-xl-8">
-									<div class="checkout-details">
-										<div class="card rounded-0">
-											<div class="card-body">
-												<div class="border p-3">
-													<h2 class="h5 mb-0">Register new account</h2>
-													<div class="my-3 border-bottom"></div>
-													<div class="form-body">
-                                                        {% if messages %}
-                                                            {% for message in messages %}
-                                                                <div id="alert-message" class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
-                                                            {% endfor %}
-                                                        {% endif %}
-														<form class="row g-3" method="post" action="{% url 'registerUser' %}">
-                                                            {% csrf_token %}
-                                                            <div class="row mt-3">
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label">First name</label>
-																    <input type="text" name="firstname" class="form-control rounded-0" required placeholder="First name">
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label">Last name</label>
-																    <input type="text" name="lastname" class="form-control rounded-0" placeholder="Last name" required>
-                                                                </div>
+						<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+							<div class="row row-cols-1 row-cols-lg-1 row-cols-xl-2">
+								<div class="col mx-auto">
+									<div class="card mb-0">
+										<div class="card-body">
+											<div class="border p-4 rounded">
+												<div class="text-center">
+													<h3 class="">Sign Up</h3>
+													<p>Already have an account? <a href="authentication-signin.html">Sign in here</a>
+													</p>
+												</div>
+												<div class="form-body">
+													<form class="row g-3" method="post" action="{% url 'registerUser' %}">
+                                                        {% csrf_token %}
+														<div class="col-sm-6">
+															<label for="inputFirstName" class="form-label">First Name</label>
+															<input type="text" name="firstname" class="form-control" id="inputFirstName" placeholder="First name" required>
+														</div>
+														<div class="col-sm-6">
+															<label for="inputLastName" class="form-label">Last Name</label>
+															<input type="text" name="lastname" class="form-control" id="inputLastName" placeholder="Last name" required>
+														</div>
+                                                        <div class="col-12">
+															<label for="inputSelectCountry" class="form-label">Date of birth</label>
+															<input class="form-control" name="dob" required type="date" id="inputSelectCountry" aria-label="Default select example"/>
+														</div>
+														<div class="col-12">
+															<label for="inputEmailAddress" class="form-label">Username</label>
+															<input type="text" name="username" class="form-control" id="inputEmailAddress" placeholder="Username" required>
+														</div>
+														<div class="col-12">
+															<label for="inputChoosePassword" class="form-label">Password</label>
+															<div class="input-group" id="show_hide_password">
+																<input type="password" required name="password" class="form-control border-end-0" id="inputChoosePassword" value="" placeholder="Password"/>
 															</div>
-                                                            <div class="row mt-3">
-                                                                <div>
-                                                                    <label class="form-label">Date of birth</label>
-																    <input type="date" name="dob" class="form-control rounded-0" required>
-                                                                </div>
+														</div>
+                                                        <div class="col-12">
+															<label for="inputEmailAddress" class="form-label">Email</label>
+															<input type="email" name="email" class="form-control" id="inputEmailAddress" placeholder="Email" required>
+														</div>
+                                                        <div class="col-12">
+															<label for="inputEmailAddress" class="form-label">Phone number</label>
+															<input type="tel" name="phone" class="form-control" id="inputEmailAddress" placeholder="Phone number" required>
+														</div>
+														<div class="col-12">
+															<div class="d-grid">
+																<button type="submit" class="btn btn-dark"><i class='bx bx-user'></i>Sign up</button>
 															</div>
-                                                            <div class="row mt-3">
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label">Username</label>
-																    <input type="text" name="username" class="form-control rounded-0" placeholder="Username" required>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label">Password</label>
-																    <input type="password" placeholder="Password" name="password" class="form-control rounded-0" required>
-                                                                </div>
-															</div>
-															<div class="row mt-3">
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label">Email</label>
-																    <input type="email" placeholder="Email" name="email" class="form-control rounded-0" required>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label class="form-label">Phone number</label>
-																    <input type="tel" placeholder="Phone number" name="phone" class="form-control rounded-0" required>
-                                                                </div>
-															</div>
-                                                            <div class="row mt-lg-4 center">
-                                                                    <button type="submit" class="btn btn-dark btn-ecomm">Register</button>
-                                                            </div>
-														</form>
-													</div>
+														</div>
+													</form>
 												</div>
 											</div>
 										</div>
@@ -79,13 +73,6 @@
 						</div>
 					</div>
 				</section>
-            <script>
-                setTimeout(function (){
-                    if ($('#alert-message').length > 0){
-                        $('#alert-message').fadeOut();
-                    }
-                }, 5000)
-            </script>
 				<!--end shop cart-->
 			</div>
 		</div>

@@ -112,7 +112,7 @@
                                                 <div class="col">
 {#                                                    Size#}
 													<label class="form-label">Size</label>
-													<select name="size_id" class="form-select form-select-sm">
+													<select name="size" class="form-select form-select-sm">
                                                         {% for p in clothes_size %}
                                                              <option value="{{ p.id }}">{{ p.name }}</option>
                                                         {% endfor %}
@@ -123,7 +123,7 @@
                                                     <div class="col">
 {#                                                    color#}
 													<label class="form-label">Size</label>
-													<select name="color_id" class="form-select form-select-sm">
+													<select name="color" class="form-select form-select-sm">
                                                         {% for i in clothes_color %}
                                                              <option value="{{ i.id }}">{{ i.name }}</option>
                                                         {% endfor %}

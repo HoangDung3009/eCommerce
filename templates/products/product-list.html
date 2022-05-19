@@ -108,7 +108,7 @@
 														</div>
 													</div>
                                                     <a href="{% url 'product-details' p.category.cat_name p.id %}">
-                                                            <img src="{{ p.product_thumb.url }}" style="object-fit: inherit; width: 100%; height: 15vw;"  class="card-img-top" alt="...">
+                                                            <img src="{{ p.product_thumb.url }}" style="object-fit: inherit; width: 100%; height: 20vw;"  class="card-img-top" alt="...">
                                                     </a>
 													<div class="card-body">
 														<div class="product-info">
@@ -122,12 +122,6 @@
 																<div class="mb-1 product-price">
 {#                                                                    <span class="me-1 text-decoration-line-through">{{ p.price }} USD</span>#}
 																	<span class="fs-5">{{ p.price|intcomma }} USD</span>
-																</div>
-																<div class="cursor-pointer ms-auto">	<i class="bx bxs-star text-warning"></i>
-																	<i class="bx bxs-star text-warning"></i>
-																	<i class="bx bxs-star text-warning"></i>
-																	<i class="bx bxs-star text-warning"></i>
-																	<i class="bx bxs-star text-warning"></i>
 																</div>
 															</div>
 															<div class="product-action mt-2">

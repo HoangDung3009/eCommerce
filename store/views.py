@@ -22,6 +22,7 @@ def index(request):
     context = {
         'feature_products': featured_products,
         'categories': categories,
-        'cart_item': cartItems
+        'cart_item': cartItems,
+        'customer': customer
     }
     return render(request, 'index.html', context)
